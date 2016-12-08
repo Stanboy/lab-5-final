@@ -1,0 +1,6 @@
+C:\Users\Zachary\Desktop\PSoC-4-BLE-master\100_Projects_in_100_Days\Day006_Central_IAS\PSoC_4_BLE_Central_IAS\PSoC_4_BLE_Central_IAS.cydsn\PSoC_4_BLE_Central_IAS.cyprj|7902f5d5-a9f2-4872-9bac-8ab9a8f230a4
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|e8cd875c-d21c-40a1-b5d4-902f28e7bb80
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|ec429b39-017b-4dfe-81b5-092a724f3afe
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|47ca1f5b-0563-4622-b80c-c6ca097d4e78
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|fdf8f00f-ae7c-4085-8388-fa2b1dc02136
+C:\Users\Zachary\Desktop\PSoC-4-BLE-master\100_Projects_in_100_Days\Day006_Central_IAS\PSoC_4_BLE_Central_IAS\BLE_Dongle_Peripheral_IAS.cydsn\BLE_Dongle_Peripheral_IAS.cyprj|796c76a7-549c-465c-8df6-56eb546473f4

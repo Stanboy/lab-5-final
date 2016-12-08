@@ -1,0 +1,5 @@
+C:\Users\Zachary\Desktop\PSoC-4-BLE-master\100_Projects_in_100_Days\Day001_Find_Me\PSoC 4 BLE - Find Me\PSoC 4 BLE - Find Me.cydsn\PSoC 4 BLE - Find Me.cyprj|bdfc2065-3326-4b72-b6d4-50446bd7922b
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|810c73cd-33d9-40a9-99e4-d57013cb5cd2
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f0ca69d5-0490-4703-a742-a8bbf5c1c7e6
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|780b66e5-e1b0-4770-adaf-a70c896014d0
+C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|cc1ad855-4979-4b37-96d9-b61b891bc40b

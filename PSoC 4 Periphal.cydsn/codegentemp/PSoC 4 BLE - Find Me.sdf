@@ -1,0 +1,24 @@
+(DELAYFILE
+ (SDFVERSION "IEEE 1497 4.0")
+ (DATE "2016-12-07T23:24:52Z")
+ (DESIGN "PSoC 4 BLE - Find Me")
+ (VENDOR "Cypress Semiconductor")
+ (PROGRAM "PSoC Creator")
+ (VERSION " 3.1 SP2")
+ (DIVIDER .)
+ (TIMESCALE 1 ns)
+ (CELL
+  (CELLTYPE "PSoC 4 BLE - Find Me")
+  (INSTANCE *)
+  (DELAY
+   (ABSOLUTE
+    (INTERCONNECT ClockBlock.hfclk \\BLE\:bless_isr\\.clock (0.000:0.000:0.000))
+    (INTERCONNECT ClockBlock.ff_div_7 \\PWM\:cy_m0s8_tcpwm_1\\.clock (0.000:0.000:0.000))
+    (INTERCONNECT \\BLE\:cy_m0s8_ble\\.interrupt \\BLE\:bless_isr\\.interrupt (1.000:1.000:1.000))
+    (INTERCONNECT Pin_B\(0\)_PAD Pin_B\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT Pin_G\(0\)_PAD Pin_G\(0\).pad_in (0.000:0.000:0.000))
+    (INTERCONNECT Pin_R\(0\)_PAD Pin_R\(0\).pad_in (0.000:0.000:0.000))
+   )
+  )
+ )
+)

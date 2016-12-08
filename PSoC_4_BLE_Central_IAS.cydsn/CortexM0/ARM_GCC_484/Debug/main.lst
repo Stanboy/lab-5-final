@@ -1,0 +1,883 @@
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.main,"ax",%progbits
+  18              		.align	2
+  19              		.global	main
+  20              		.code	16
+  21              		.thumb_func
+  22              		.type	main, %function
+  23              	main:
+  24              	.LFB35:
+  25              		.file 1 ".\\main.c"
+   1:.\main.c      **** /******************************************************************************
+   2:.\main.c      **** * Project Name		: PSoC_4_BLE_Central_IAS
+   3:.\main.c      **** * File Name			: main.c
+   4:.\main.c      **** * Version 			: 1.0
+   5:.\main.c      **** * Device Used		: CY8C4247LQI-BL483
+   6:.\main.c      **** * Software Used		: PSoC Creator 3.1
+   7:.\main.c      **** * Compiler    		: ARM GCC 4.8.4, ARM RVDS Generic, ARM MDK Generic
+   8:.\main.c      **** * Related Hardware	: CY8CKIT-042-BLE Bluetooth Low Energy Pioneer Kit 
+   9:.\main.c      **** * Owner				: ROIT
+  10:.\main.c      **** *
+  11:.\main.c      **** ********************************************************************************
+  12:.\main.c      **** * Copyright (2014-15), Cypress Semiconductor Corporation. All Rights Reserved.
+  13:.\main.c      **** ********************************************************************************
+  14:.\main.c      **** * This software is owned by Cypress Semiconductor Corporation (Cypress)
+  15:.\main.c      **** * and is protected by and subject to worldwide patent protection (United
+  16:.\main.c      **** * States and foreign), United States copyright laws and international treaty
+  17:.\main.c      **** * provisions. Cypress hereby grants to licensee a personal, non-exclusive,
+  18:.\main.c      **** * non-transferable license to copy, use, modify, create derivative works of,
+  19:.\main.c      **** * and compile the Cypress Source Code and derivative works for the sole
+  20:.\main.c      **** * purpose of creating custom software in support of licensee product to be
+  21:.\main.c      **** * used only in conjunction with a Cypress integrated circuit as specified in
+  22:.\main.c      **** * the applicable agreement. Any reproduction, modification, translation,
+  23:.\main.c      **** * compilation, or representation of this software except as specified above 
+  24:.\main.c      **** * is prohibited without the express written permission of Cypress.
+  25:.\main.c      **** *
+  26:.\main.c      **** * Disclaimer: CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH 
+  27:.\main.c      **** * REGARD TO THIS MATERIAL, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  28:.\main.c      **** * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  29:.\main.c      **** * Cypress reserves the right to make changes without further notice to the 
+  30:.\main.c      **** * materials described herein. Cypress does not assume any liability arising out 
+  31:.\main.c      **** * of the application or use of any product or circuit described herein. Cypress 
+  32:.\main.c      **** * does not authorize its products for use as critical components in life-support 
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 2
+
+
+  33:.\main.c      **** * systems where a malfunction or failure may reasonably be expected to result in 
+  34:.\main.c      **** * significant injury to the user. The inclusion of Cypress' product in a life-
+  35:.\main.c      **** * support systems application implies that the manufacturer assumes all risk of 
+  36:.\main.c      **** * such use and in doing so indemnifies Cypress against all charges. 
+  37:.\main.c      **** *
+  38:.\main.c      **** * Use of this Software may be limited by and subject to the applicable Cypress
+  39:.\main.c      **** * software license agreement. 
+  40:.\main.c      **** *******************************************************************************/
+  41:.\main.c      **** 
+  42:.\main.c      **** /******************************************************************************
+  43:.\main.c      **** *                           THEORY OF OPERATION
+  44:.\main.c      **** *******************************************************************************
+  45:.\main.c      **** * The project will showcase the capability of PSoC 4 BLE to act as BLE Central
+  46:.\main.c      **** * device and communicate with a BLE Peripheral device. The example 
+  47:.\main.c      **** * demonstrated is a BLE application called as Find Me. Here, the BLE Pioneer kit,
+  48:.\main.c      **** * programmed with this firmware, acts as Find Me Collector. CySmart USB Dongle, 
+  49:.\main.c      **** * which is programmed with the BLE_Dongle_Peripheral_IAS, acts as a Find Me 
+  50:.\main.c      **** * Reporter. 
+  51:.\main.c      **** * This Central project support low power mode, which allows low power current 
+  52:.\main.c      **** * consumption possible for this application. The BLE central project goes to deep 
+  53:.\main.c      **** * sleep during scanning timeout or disconnection and can be woken up using 
+  54:.\main.c      **** * the User Button. During connection, the firmware pushes the system to deep 
+  55:.\main.c      **** * sleep whenever possible. If BLE_Dongle_Peripheral_IAS is advertising, then this 
+  56:.\main.c      **** * project connects to it automatically. 
+  57:.\main.c      **** * After the two devices are connected, the Push Button on the BLE Pioneer kit 
+  58:.\main.c      **** * will switch the Alert level between No, Mid and High Alert on CySmart USB Dongle,
+  59:.\main.c      **** * which is demonstrated by the different mode of lighting LED.
+  60:.\main.c      **** *
+  61:.\main.c      **** * Note: Though this project has Deep Sleep mode implemented allowing very low power 
+  62:.\main.c      **** * consumption, the BLE scanning process consists of radio RX activity and thus
+  63:.\main.c      **** * consumes considerably more current. 
+  64:.\main.c      **** 
+  65:.\main.c      **** * The programming pins have been configured as GPIO, and not SWD. This is because 
+  66:.\main.c      **** * when programming pins are configured for SWD, then the silicon consumes extra
+  67:.\main.c      **** * power through the pins. To prevent the leakage of power, the pins have been set 
+  68:.\main.c      **** * to GPIO. With this setting, the kit can still be acquired by PSoC Creator or
+  69:.\main.c      **** * PSoC Programmer software tools for programming, but the project cannot be 
+  70:.\main.c      **** * externally debugged. To re-enable debugging, go to PSoC_4_BLE_Central_IAS.cydwr from
+  71:.\main.c      **** * Workspace Explorer, go to Systems tab, and set the Debug Select option to 'SWD'.
+  72:.\main.c      **** * Build and program this project to enable external Debugging.
+  73:.\main.c      **** *
+  74:.\main.c      **** * Refer to BLE Pioneer Kit user guide for details.
+  75:.\main.c      **** *******************************************************************************
+  76:.\main.c      **** * Hardware connection required for testing -
+  77:.\main.c      **** * Status LED- P3[7] (Hard-wired on the BLE Pioneer kit)
+  78:.\main.c      **** * User Button- P2[7] (hard-wired in the BLE Pioneer kit)
+  79:.\main.c      **** ******************************************************************************/
+  80:.\main.c      **** #include <main.h>
+  81:.\main.c      **** 
+  82:.\main.c      **** /* 'ble_state' stores the state of connection which is used for updating LEDs */
+  83:.\main.c      **** extern uint8 					ble_state ;
+  84:.\main.c      **** 
+  85:.\main.c      **** /* 'deviceConnected' flag tells the status of connection with BLE peripheral Device */
+  86:.\main.c      **** extern uint8 					deviceConnected;
+  87:.\main.c      **** 
+  88:.\main.c      **** /* 'connectPeriphDevice' is a variable of type 'CYBLE_GAP_BD_ADDR_T' (defined in 
+  89:.\main.c      **** * BLE_StackGap.h) and is used to store address of the connected device. */
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 3
+
+
+  90:.\main.c      **** extern CYBLE_GAP_BD_ADDR_T connectPeriphDevice;
+  91:.\main.c      **** 
+  92:.\main.c      **** /* 'peripheralAddress' stores the addresses of device presently connected to */
+  93:.\main.c      **** extern uint8 peripheralFound;
+  94:.\main.c      **** 
+  95:.\main.c      **** extern uint8 restartScanning;
+  96:.\main.c      **** /*******************************************************************************
+  97:.\main.c      **** * Function Name: main
+  98:.\main.c      **** ********************************************************************************
+  99:.\main.c      **** * Summary:
+ 100:.\main.c      **** *        System entrance point. This calls the BLE routine functions as well as
+ 101:.\main.c      **** * function for sending Immediate Alert level notifications and handling low power
+ 102:.\main.c      **** * mode.
+ 103:.\main.c      **** *
+ 104:.\main.c      **** * Parameters:
+ 105:.\main.c      **** *  void
+ 106:.\main.c      **** *
+ 107:.\main.c      **** * Return:
+ 108:.\main.c      **** *  int
+ 109:.\main.c      **** *
+ 110:.\main.c      **** 
+ 111:.\main.c      **** *******************************************************************************/
+ 112:.\main.c      **** int main()
+ 113:.\main.c      **** {
+  26              		.loc 1 113 0
+  27              		.cfi_startproc
+  28 0000 80B5     		push	{r7, lr}
+  29              		.cfi_def_cfa_offset 8
+  30              		.cfi_offset 7, -8
+  31              		.cfi_offset 14, -4
+  32 0002 00AF     		add	r7, sp, #0
+  33              		.cfi_def_cfa_register 7
+ 114:.\main.c      ****     /* Initialize the system */
+ 115:.\main.c      **** 	InitializeSystem();
+  34              		.loc 1 115 0
+  35 0004 FFF7FEFF 		bl	InitializeSystem
+  36              	.L5:
+ 116:.\main.c      **** 	
+ 117:.\main.c      ****     for(;;)
+ 118:.\main.c      ****     {
+ 119:.\main.c      ****         /*Process Event callback to handle BLE events. The events generated and 
+ 120:.\main.c      **** 		* used for this application are inside the 'ApplicationEventHandler' routine */
+ 121:.\main.c      **** 		CyBle_ProcessEvents();
+  37              		.loc 1 121 0
+  38 0008 FFF7FEFF 		bl	CyBle_ProcessEvents
+ 122:.\main.c      **** 		
+ 123:.\main.c      **** 		/* Handle BLE Status LED */
+ 124:.\main.c      **** 		HandleLEDs(ble_state);
+  39              		.loc 1 124 0
+  40 000c 134B     		ldr	r3, .L6
+  41 000e 1B78     		ldrb	r3, [r3]
+  42 0010 181C     		mov	r0, r3
+  43 0012 FFF7FEFF 		bl	HandleLEDs
+ 125:.\main.c      **** 		
+ 126:.\main.c      **** 		if(peripheralFound)
+  44              		.loc 1 126 0
+  45 0016 124B     		ldr	r3, .L6+4
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 4
+
+
+  46 0018 1B78     		ldrb	r3, [r3]
+  47 001a 002B     		cmp	r3, #0
+  48 001c 08D0     		beq	.L2
+ 127:.\main.c      **** 		{
+ 128:.\main.c      **** 			/* If the desired peripheral is found, then connect to that peripheral */
+ 129:.\main.c      **** 			CyBle_GapcConnectDevice(&connectPeriphDevice);
+  49              		.loc 1 129 0
+  50 001e 114B     		ldr	r3, .L6+8
+  51 0020 181C     		mov	r0, r3
+  52 0022 FFF7FEFF 		bl	CyBle_GapcConnectDevice
+ 130:.\main.c      **** 			
+ 131:.\main.c      **** 			/* Call CyBle_ProcessEvents() once to process the Connect request sent above. */
+ 132:.\main.c      **** 			CyBle_ProcessEvents();
+  53              		.loc 1 132 0
+  54 0026 FFF7FEFF 		bl	CyBle_ProcessEvents
+ 133:.\main.c      **** 		
+ 134:.\main.c      **** 			/* Reset flag to prevent resending the Connect command */
+ 135:.\main.c      **** 			peripheralFound = FALSE;
+  55              		.loc 1 135 0
+  56 002a 0D4B     		ldr	r3, .L6+4
+  57 002c 0022     		mov	r2, #0
+  58 002e 1A70     		strb	r2, [r3]
+  59              	.L2:
+ 136:.\main.c      **** 		}
+ 137:.\main.c      **** 			
+ 138:.\main.c      **** 		if(deviceConnected)
+  60              		.loc 1 138 0
+  61 0030 0D4B     		ldr	r3, .L6+12
+  62 0032 1B78     		ldrb	r3, [r3]
+  63 0034 002B     		cmp	r3, #0
+  64 0036 01D0     		beq	.L3
+ 139:.\main.c      **** 		{
+ 140:.\main.c      **** 			/* Check if the button was pressed and update the Alert Level Accordingly.*/
+ 141:.\main.c      **** 			CheckButtonStatus();	
+  65              		.loc 1 141 0
+  66 0038 FFF7FEFF 		bl	CheckButtonStatus
+  67              	.L3:
+ 142:.\main.c      **** 		}
+ 143:.\main.c      **** 		
+ 144:.\main.c      **** 		#ifdef ENABLE_LOW_POWER_MODE
+ 145:.\main.c      **** 			/* Call CyBle_ProcessEvents to process all events before going to sleep. */
+ 146:.\main.c      **** 			CyBle_ProcessEvents();
+  68              		.loc 1 146 0
+  69 003c FFF7FEFF 		bl	CyBle_ProcessEvents
+ 147:.\main.c      **** 		
+ 148:.\main.c      **** 			/* Put the system in Low power mode */
+ 149:.\main.c      **** 			HandleLowPowerMode();
+  70              		.loc 1 149 0
+  71 0040 FFF7FEFF 		bl	HandleLowPowerMode
+ 150:.\main.c      **** 		#endif
+ 151:.\main.c      **** 		
+ 152:.\main.c      **** 		/* If rescanning flag is TRUE, the restart the scan */
+ 153:.\main.c      **** 		if(restartScanning)
+  72              		.loc 1 153 0
+  73 0044 094B     		ldr	r3, .L6+16
+  74 0046 1B78     		ldrb	r3, [r3]
+  75 0048 002B     		cmp	r3, #0
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 5
+
+
+  76 004a 06D0     		beq	.L4
+ 154:.\main.c      **** 		{
+ 155:.\main.c      **** 			/* Reset flag to prevent calling multiple Start Scan commands */
+ 156:.\main.c      **** 			restartScanning = FALSE;
+  77              		.loc 1 156 0
+  78 004c 074B     		ldr	r3, .L6+16
+  79 004e 0022     		mov	r2, #0
+  80 0050 1A70     		strb	r2, [r3]
+ 157:.\main.c      **** 			
+ 158:.\main.c      **** 			/* Start Fast BLE Scanning. This API will only take effect after calling
+ 159:.\main.c      **** 			* CyBle_ProcessEvents()*/
+ 160:.\main.c      **** 			CyBle_GapcStartScan(CYBLE_SCANNING_FAST);
+  81              		.loc 1 160 0
+  82 0052 0020     		mov	r0, #0
+  83 0054 FFF7FEFF 		bl	CyBle_GapcStartScan
+ 161:.\main.c      **** 		}
+ 162:.\main.c      **** 	}
+  84              		.loc 1 162 0
+  85 0058 D6E7     		b	.L5
+  86              	.L4:
+  87 005a D5E7     		b	.L5
+  88              	.L7:
+  89              		.align	2
+  90              	.L6:
+  91 005c 00000000 		.word	ble_state
+  92 0060 00000000 		.word	peripheralFound
+  93 0064 00000000 		.word	connectPeriphDevice
+  94 0068 00000000 		.word	deviceConnected
+  95 006c 00000000 		.word	restartScanning
+  96              		.cfi_endproc
+  97              	.LFE35:
+  98              		.size	main, .-main
+  99              		.section	.text.InitializeSystem,"ax",%progbits
+ 100              		.align	2
+ 101              		.global	InitializeSystem
+ 102              		.code	16
+ 103              		.thumb_func
+ 104              		.type	InitializeSystem, %function
+ 105              	InitializeSystem:
+ 106              	.LFB36:
+ 163:.\main.c      **** }
+ 164:.\main.c      **** 
+ 165:.\main.c      **** /*******************************************************************************
+ 166:.\main.c      **** * Function Name: InitializeSystem
+ 167:.\main.c      **** ********************************************************************************
+ 168:.\main.c      **** * Summary:
+ 169:.\main.c      **** *        This function starts and initializes the components involved in the 
+ 170:.\main.c      **** * system
+ 171:.\main.c      **** *
+ 172:.\main.c      **** * Parameters:
+ 173:.\main.c      **** *  void
+ 174:.\main.c      **** *
+ 175:.\main.c      **** * Return:
+ 176:.\main.c      **** *  void
+ 177:.\main.c      **** *
+ 178:.\main.c      **** 
+ 179:.\main.c      **** *******************************************************************************/
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 6
+
+
+ 180:.\main.c      **** void InitializeSystem(void)
+ 181:.\main.c      **** {
+ 107              		.loc 1 181 0
+ 108              		.cfi_startproc
+ 109 0000 80B5     		push	{r7, lr}
+ 110              		.cfi_def_cfa_offset 8
+ 111              		.cfi_offset 7, -8
+ 112              		.cfi_offset 14, -4
+ 113 0002 00AF     		add	r7, sp, #0
+ 114              		.cfi_def_cfa_register 7
+ 182:.\main.c      **** 	/* Enable global interrupts. */
+ 183:.\main.c      **** 	CyGlobalIntEnable; 
+ 115              		.loc 1 183 0
+ 116              	@ 183 ".\main.c" 1
+ 117 0004 62B6     		CPSIE   i
+ 118              	@ 0 "" 2
+ 184:.\main.c      **** 	
+ 185:.\main.c      **** 	/* Start BLE component with appropriate Event handler function */
+ 186:.\main.c      **** 	CyBle_Start(ApplicationEventHandler);	
+ 119              		.loc 1 186 0
+ 120              		.code	16
+ 121 0006 064B     		ldr	r3, .L9
+ 122 0008 181C     		mov	r0, r3
+ 123 000a FFF7FEFF 		bl	CyBle_Start
+ 187:.\main.c      **** 	
+ 188:.\main.c      **** 	/* Load the BD address of peripheral device to which we have to connect */
+ 189:.\main.c      **** 	LoadPeripheralDeviceData(); 
+ 124              		.loc 1 189 0
+ 125 000e FFF7FEFF 		bl	LoadPeripheralDeviceData
+ 190:.\main.c      **** 	
+ 191:.\main.c      **** 	/* Start the Button ISR and indicate the ISR routine */
+ 192:.\main.c      **** 	isr_button_StartEx(MyISR);
+ 126              		.loc 1 192 0
+ 127 0012 044B     		ldr	r3, .L9+4
+ 128 0014 181C     		mov	r0, r3
+ 129 0016 FFF7FEFF 		bl	isr_button_StartEx
+ 193:.\main.c      **** }
+ 130              		.loc 1 193 0
+ 131 001a BD46     		mov	sp, r7
+ 132              		@ sp needed
+ 133 001c 80BD     		pop	{r7, pc}
+ 134              	.L10:
+ 135 001e C046     		.align	2
+ 136              	.L9:
+ 137 0020 00000000 		.word	ApplicationEventHandler
+ 138 0024 00000000 		.word	MyISR
+ 139              		.cfi_endproc
+ 140              	.LFE36:
+ 141              		.size	InitializeSystem, .-InitializeSystem
+ 142              		.text
+ 143              	.Letext0:
+ 144              		.file 2 ".\\Generated_Source\\PSoC4/BLE_Stack.h"
+ 145              		.file 3 ".\\Generated_Source\\PSoC4/cytypes.h"
+ 146              		.section	.debug_info,"",%progbits
+ 147              	.Ldebug_info0:
+ 148 0000 2C010000 		.4byte	0x12c
+ 149 0004 0400     		.2byte	0x4
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 7
+
+
+ 150 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 151 000a 04       		.byte	0x4
+ 152 000b 01       		.uleb128 0x1
+ 153 000c 54010000 		.4byte	.LASF24
+ 154 0010 01       		.byte	0x1
+ 155 0011 44010000 		.4byte	.LASF25
+ 156 0015 13000000 		.4byte	.LASF26
+ 157 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 158 001d 00000000 		.4byte	0
+ 159 0021 00000000 		.4byte	.Ldebug_line0
+ 160 0025 02       		.uleb128 0x2
+ 161 0026 01       		.byte	0x1
+ 162 0027 06       		.byte	0x6
+ 163 0028 E3010000 		.4byte	.LASF0
+ 164 002c 02       		.uleb128 0x2
+ 165 002d 01       		.byte	0x1
+ 166 002e 08       		.byte	0x8
+ 167 002f 08010000 		.4byte	.LASF1
+ 168 0033 02       		.uleb128 0x2
+ 169 0034 02       		.byte	0x2
+ 170 0035 05       		.byte	0x5
+ 171 0036 05020000 		.4byte	.LASF2
+ 172 003a 02       		.uleb128 0x2
+ 173 003b 02       		.byte	0x2
+ 174 003c 07       		.byte	0x7
+ 175 003d D0010000 		.4byte	.LASF3
+ 176 0041 02       		.uleb128 0x2
+ 177 0042 04       		.byte	0x4
+ 178 0043 05       		.byte	0x5
+ 179 0044 2B010000 		.4byte	.LASF4
+ 180 0048 02       		.uleb128 0x2
+ 181 0049 04       		.byte	0x4
+ 182 004a 07       		.byte	0x7
+ 183 004b A4000000 		.4byte	.LASF5
+ 184 004f 02       		.uleb128 0x2
+ 185 0050 08       		.byte	0x8
+ 186 0051 05       		.byte	0x5
+ 187 0052 00000000 		.4byte	.LASF6
+ 188 0056 02       		.uleb128 0x2
+ 189 0057 08       		.byte	0x8
+ 190 0058 07       		.byte	0x7
+ 191 0059 B6000000 		.4byte	.LASF7
+ 192 005d 03       		.uleb128 0x3
+ 193 005e 04       		.byte	0x4
+ 194 005f 05       		.byte	0x5
+ 195 0060 696E7400 		.ascii	"int\000"
+ 196 0064 02       		.uleb128 0x2
+ 197 0065 04       		.byte	0x4
+ 198 0066 07       		.byte	0x7
+ 199 0067 0F020000 		.4byte	.LASF8
+ 200 006b 04       		.uleb128 0x4
+ 201 006c 9E000000 		.4byte	.LASF15
+ 202 0070 03       		.byte	0x3
+ 203 0071 A1       		.byte	0xa1
+ 204 0072 2C000000 		.4byte	0x2c
+ 205 0076 02       		.uleb128 0x2
+ 206 0077 04       		.byte	0x4
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 8
+
+
+ 207 0078 04       		.byte	0x4
+ 208 0079 FF010000 		.4byte	.LASF9
+ 209 007d 02       		.uleb128 0x2
+ 210 007e 08       		.byte	0x8
+ 211 007f 04       		.byte	0x4
+ 212 0080 4D010000 		.4byte	.LASF10
+ 213 0084 02       		.uleb128 0x2
+ 214 0085 01       		.byte	0x1
+ 215 0086 08       		.byte	0x8
+ 216 0087 FC000000 		.4byte	.LASF11
+ 217 008b 02       		.uleb128 0x2
+ 218 008c 04       		.byte	0x4
+ 219 008d 07       		.byte	0x7
+ 220 008e 30020000 		.4byte	.LASF12
+ 221 0092 05       		.uleb128 0x5
+ 222 0093 07       		.byte	0x7
+ 223 0094 02       		.byte	0x2
+ 224 0095 7502     		.2byte	0x275
+ 225 0097 B6000000 		.4byte	0xb6
+ 226 009b 06       		.uleb128 0x6
+ 227 009c 01010000 		.4byte	.LASF13
+ 228 00a0 02       		.byte	0x2
+ 229 00a1 7702     		.2byte	0x277
+ 230 00a3 B6000000 		.4byte	0xb6
+ 231 00a7 00       		.byte	0
+ 232 00a8 06       		.uleb128 0x6
+ 233 00a9 0E000000 		.4byte	.LASF14
+ 234 00ad 02       		.byte	0x2
+ 235 00ae 7802     		.2byte	0x278
+ 236 00b0 6B000000 		.4byte	0x6b
+ 237 00b4 06       		.byte	0x6
+ 238 00b5 00       		.byte	0
+ 239 00b6 07       		.uleb128 0x7
+ 240 00b7 6B000000 		.4byte	0x6b
+ 241 00bb C6000000 		.4byte	0xc6
+ 242 00bf 08       		.uleb128 0x8
+ 243 00c0 8B000000 		.4byte	0x8b
+ 244 00c4 05       		.byte	0x5
+ 245 00c5 00       		.byte	0
+ 246 00c6 09       		.uleb128 0x9
+ 247 00c7 1C020000 		.4byte	.LASF16
+ 248 00cb 02       		.byte	0x2
+ 249 00cc 7902     		.2byte	0x279
+ 250 00ce 92000000 		.4byte	0x92
+ 251 00d2 0A       		.uleb128 0xa
+ 252 00d3 16010000 		.4byte	.LASF17
+ 253 00d7 01       		.byte	0x1
+ 254 00d8 70       		.byte	0x70
+ 255 00d9 5D000000 		.4byte	0x5d
+ 256 00dd 00000000 		.4byte	.LFB35
+ 257 00e1 70000000 		.4byte	.LFE35-.LFB35
+ 258 00e5 01       		.uleb128 0x1
+ 259 00e6 9C       		.byte	0x9c
+ 260 00e7 0B       		.uleb128 0xb
+ 261 00e8 CD000000 		.4byte	.LASF18
+ 262 00ec 01       		.byte	0x1
+ 263 00ed B4       		.byte	0xb4
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 9
+
+
+ 264 00ee 00000000 		.4byte	.LFB36
+ 265 00f2 28000000 		.4byte	.LFE36-.LFB36
+ 266 00f6 01       		.uleb128 0x1
+ 267 00f7 9C       		.byte	0x9c
+ 268 00f8 0C       		.uleb128 0xc
+ 269 00f9 F2000000 		.4byte	.LASF19
+ 270 00fd 01       		.byte	0x1
+ 271 00fe 53       		.byte	0x53
+ 272 00ff 6B000000 		.4byte	0x6b
+ 273 0103 0C       		.uleb128 0xc
+ 274 0104 1B010000 		.4byte	.LASF20
+ 275 0108 01       		.byte	0x1
+ 276 0109 56       		.byte	0x56
+ 277 010a 6B000000 		.4byte	0x6b
+ 278 010e 0C       		.uleb128 0xc
+ 279 010f DE000000 		.4byte	.LASF21
+ 280 0113 01       		.byte	0x1
+ 281 0114 5A       		.byte	0x5a
+ 282 0115 C6000000 		.4byte	0xc6
+ 283 0119 0C       		.uleb128 0xc
+ 284 011a 34010000 		.4byte	.LASF22
+ 285 011e 01       		.byte	0x1
+ 286 011f 5D       		.byte	0x5d
+ 287 0120 6B000000 		.4byte	0x6b
+ 288 0124 0C       		.uleb128 0xc
+ 289 0125 EF010000 		.4byte	.LASF23
+ 290 0129 01       		.byte	0x1
+ 291 012a 5F       		.byte	0x5f
+ 292 012b 6B000000 		.4byte	0x6b
+ 293 012f 00       		.byte	0
+ 294              		.section	.debug_abbrev,"",%progbits
+ 295              	.Ldebug_abbrev0:
+ 296 0000 01       		.uleb128 0x1
+ 297 0001 11       		.uleb128 0x11
+ 298 0002 01       		.byte	0x1
+ 299 0003 25       		.uleb128 0x25
+ 300 0004 0E       		.uleb128 0xe
+ 301 0005 13       		.uleb128 0x13
+ 302 0006 0B       		.uleb128 0xb
+ 303 0007 03       		.uleb128 0x3
+ 304 0008 0E       		.uleb128 0xe
+ 305 0009 1B       		.uleb128 0x1b
+ 306 000a 0E       		.uleb128 0xe
+ 307 000b 55       		.uleb128 0x55
+ 308 000c 17       		.uleb128 0x17
+ 309 000d 11       		.uleb128 0x11
+ 310 000e 01       		.uleb128 0x1
+ 311 000f 10       		.uleb128 0x10
+ 312 0010 17       		.uleb128 0x17
+ 313 0011 00       		.byte	0
+ 314 0012 00       		.byte	0
+ 315 0013 02       		.uleb128 0x2
+ 316 0014 24       		.uleb128 0x24
+ 317 0015 00       		.byte	0
+ 318 0016 0B       		.uleb128 0xb
+ 319 0017 0B       		.uleb128 0xb
+ 320 0018 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 10
+
+
+ 321 0019 0B       		.uleb128 0xb
+ 322 001a 03       		.uleb128 0x3
+ 323 001b 0E       		.uleb128 0xe
+ 324 001c 00       		.byte	0
+ 325 001d 00       		.byte	0
+ 326 001e 03       		.uleb128 0x3
+ 327 001f 24       		.uleb128 0x24
+ 328 0020 00       		.byte	0
+ 329 0021 0B       		.uleb128 0xb
+ 330 0022 0B       		.uleb128 0xb
+ 331 0023 3E       		.uleb128 0x3e
+ 332 0024 0B       		.uleb128 0xb
+ 333 0025 03       		.uleb128 0x3
+ 334 0026 08       		.uleb128 0x8
+ 335 0027 00       		.byte	0
+ 336 0028 00       		.byte	0
+ 337 0029 04       		.uleb128 0x4
+ 338 002a 16       		.uleb128 0x16
+ 339 002b 00       		.byte	0
+ 340 002c 03       		.uleb128 0x3
+ 341 002d 0E       		.uleb128 0xe
+ 342 002e 3A       		.uleb128 0x3a
+ 343 002f 0B       		.uleb128 0xb
+ 344 0030 3B       		.uleb128 0x3b
+ 345 0031 0B       		.uleb128 0xb
+ 346 0032 49       		.uleb128 0x49
+ 347 0033 13       		.uleb128 0x13
+ 348 0034 00       		.byte	0
+ 349 0035 00       		.byte	0
+ 350 0036 05       		.uleb128 0x5
+ 351 0037 13       		.uleb128 0x13
+ 352 0038 01       		.byte	0x1
+ 353 0039 0B       		.uleb128 0xb
+ 354 003a 0B       		.uleb128 0xb
+ 355 003b 3A       		.uleb128 0x3a
+ 356 003c 0B       		.uleb128 0xb
+ 357 003d 3B       		.uleb128 0x3b
+ 358 003e 05       		.uleb128 0x5
+ 359 003f 01       		.uleb128 0x1
+ 360 0040 13       		.uleb128 0x13
+ 361 0041 00       		.byte	0
+ 362 0042 00       		.byte	0
+ 363 0043 06       		.uleb128 0x6
+ 364 0044 0D       		.uleb128 0xd
+ 365 0045 00       		.byte	0
+ 366 0046 03       		.uleb128 0x3
+ 367 0047 0E       		.uleb128 0xe
+ 368 0048 3A       		.uleb128 0x3a
+ 369 0049 0B       		.uleb128 0xb
+ 370 004a 3B       		.uleb128 0x3b
+ 371 004b 05       		.uleb128 0x5
+ 372 004c 49       		.uleb128 0x49
+ 373 004d 13       		.uleb128 0x13
+ 374 004e 38       		.uleb128 0x38
+ 375 004f 0B       		.uleb128 0xb
+ 376 0050 00       		.byte	0
+ 377 0051 00       		.byte	0
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 11
+
+
+ 378 0052 07       		.uleb128 0x7
+ 379 0053 01       		.uleb128 0x1
+ 380 0054 01       		.byte	0x1
+ 381 0055 49       		.uleb128 0x49
+ 382 0056 13       		.uleb128 0x13
+ 383 0057 01       		.uleb128 0x1
+ 384 0058 13       		.uleb128 0x13
+ 385 0059 00       		.byte	0
+ 386 005a 00       		.byte	0
+ 387 005b 08       		.uleb128 0x8
+ 388 005c 21       		.uleb128 0x21
+ 389 005d 00       		.byte	0
+ 390 005e 49       		.uleb128 0x49
+ 391 005f 13       		.uleb128 0x13
+ 392 0060 2F       		.uleb128 0x2f
+ 393 0061 0B       		.uleb128 0xb
+ 394 0062 00       		.byte	0
+ 395 0063 00       		.byte	0
+ 396 0064 09       		.uleb128 0x9
+ 397 0065 16       		.uleb128 0x16
+ 398 0066 00       		.byte	0
+ 399 0067 03       		.uleb128 0x3
+ 400 0068 0E       		.uleb128 0xe
+ 401 0069 3A       		.uleb128 0x3a
+ 402 006a 0B       		.uleb128 0xb
+ 403 006b 3B       		.uleb128 0x3b
+ 404 006c 05       		.uleb128 0x5
+ 405 006d 49       		.uleb128 0x49
+ 406 006e 13       		.uleb128 0x13
+ 407 006f 00       		.byte	0
+ 408 0070 00       		.byte	0
+ 409 0071 0A       		.uleb128 0xa
+ 410 0072 2E       		.uleb128 0x2e
+ 411 0073 00       		.byte	0
+ 412 0074 3F       		.uleb128 0x3f
+ 413 0075 19       		.uleb128 0x19
+ 414 0076 03       		.uleb128 0x3
+ 415 0077 0E       		.uleb128 0xe
+ 416 0078 3A       		.uleb128 0x3a
+ 417 0079 0B       		.uleb128 0xb
+ 418 007a 3B       		.uleb128 0x3b
+ 419 007b 0B       		.uleb128 0xb
+ 420 007c 49       		.uleb128 0x49
+ 421 007d 13       		.uleb128 0x13
+ 422 007e 11       		.uleb128 0x11
+ 423 007f 01       		.uleb128 0x1
+ 424 0080 12       		.uleb128 0x12
+ 425 0081 06       		.uleb128 0x6
+ 426 0082 40       		.uleb128 0x40
+ 427 0083 18       		.uleb128 0x18
+ 428 0084 9642     		.uleb128 0x2116
+ 429 0086 19       		.uleb128 0x19
+ 430 0087 00       		.byte	0
+ 431 0088 00       		.byte	0
+ 432 0089 0B       		.uleb128 0xb
+ 433 008a 2E       		.uleb128 0x2e
+ 434 008b 00       		.byte	0
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 12
+
+
+ 435 008c 3F       		.uleb128 0x3f
+ 436 008d 19       		.uleb128 0x19
+ 437 008e 03       		.uleb128 0x3
+ 438 008f 0E       		.uleb128 0xe
+ 439 0090 3A       		.uleb128 0x3a
+ 440 0091 0B       		.uleb128 0xb
+ 441 0092 3B       		.uleb128 0x3b
+ 442 0093 0B       		.uleb128 0xb
+ 443 0094 27       		.uleb128 0x27
+ 444 0095 19       		.uleb128 0x19
+ 445 0096 11       		.uleb128 0x11
+ 446 0097 01       		.uleb128 0x1
+ 447 0098 12       		.uleb128 0x12
+ 448 0099 06       		.uleb128 0x6
+ 449 009a 40       		.uleb128 0x40
+ 450 009b 18       		.uleb128 0x18
+ 451 009c 9642     		.uleb128 0x2116
+ 452 009e 19       		.uleb128 0x19
+ 453 009f 00       		.byte	0
+ 454 00a0 00       		.byte	0
+ 455 00a1 0C       		.uleb128 0xc
+ 456 00a2 34       		.uleb128 0x34
+ 457 00a3 00       		.byte	0
+ 458 00a4 03       		.uleb128 0x3
+ 459 00a5 0E       		.uleb128 0xe
+ 460 00a6 3A       		.uleb128 0x3a
+ 461 00a7 0B       		.uleb128 0xb
+ 462 00a8 3B       		.uleb128 0x3b
+ 463 00a9 0B       		.uleb128 0xb
+ 464 00aa 49       		.uleb128 0x49
+ 465 00ab 13       		.uleb128 0x13
+ 466 00ac 3F       		.uleb128 0x3f
+ 467 00ad 19       		.uleb128 0x19
+ 468 00ae 3C       		.uleb128 0x3c
+ 469 00af 19       		.uleb128 0x19
+ 470 00b0 00       		.byte	0
+ 471 00b1 00       		.byte	0
+ 472 00b2 00       		.byte	0
+ 473              		.section	.debug_aranges,"",%progbits
+ 474 0000 24000000 		.4byte	0x24
+ 475 0004 0200     		.2byte	0x2
+ 476 0006 00000000 		.4byte	.Ldebug_info0
+ 477 000a 04       		.byte	0x4
+ 478 000b 00       		.byte	0
+ 479 000c 0000     		.2byte	0
+ 480 000e 0000     		.2byte	0
+ 481 0010 00000000 		.4byte	.LFB35
+ 482 0014 70000000 		.4byte	.LFE35-.LFB35
+ 483 0018 00000000 		.4byte	.LFB36
+ 484 001c 28000000 		.4byte	.LFE36-.LFB36
+ 485 0020 00000000 		.4byte	0
+ 486 0024 00000000 		.4byte	0
+ 487              		.section	.debug_ranges,"",%progbits
+ 488              	.Ldebug_ranges0:
+ 489 0000 00000000 		.4byte	.LFB35
+ 490 0004 70000000 		.4byte	.LFE35
+ 491 0008 00000000 		.4byte	.LFB36
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 13
+
+
+ 492 000c 28000000 		.4byte	.LFE36
+ 493 0010 00000000 		.4byte	0
+ 494 0014 00000000 		.4byte	0
+ 495              		.section	.debug_line,"",%progbits
+ 496              	.Ldebug_line0:
+ 497 0000 8E000000 		.section	.debug_str,"MS",%progbits,1
+ 497      02005400 
+ 497      00000201 
+ 497      FB0E0D00 
+ 497      01010101 
+ 498              	.LASF6:
+ 499 0000 6C6F6E67 		.ascii	"long long int\000"
+ 499      206C6F6E 
+ 499      6720696E 
+ 499      7400
+ 500              	.LASF14:
+ 501 000e 74797065 		.ascii	"type\000"
+ 501      00
+ 502              	.LASF26:
+ 503 0013 433A5C55 		.ascii	"C:\\Users\\Zachary\\Desktop\\PSoC-4-BLE-master\\100"
+ 503      73657273 
+ 503      5C5A6163 
+ 503      68617279 
+ 503      5C446573 
+ 504 0041 5F50726F 		.ascii	"_Projects_in_100_Days\\Day006_Central_IAS\\PSoC_4_B"
+ 504      6A656374 
+ 504      735F696E 
+ 504      5F313030 
+ 504      5F446179 
+ 505 0072 4C455F43 		.ascii	"LE_Central_IAS\\PSoC_4_BLE_Central_IAS.cydsn\000"
+ 505      656E7472 
+ 505      616C5F49 
+ 505      41535C50 
+ 505      536F435F 
+ 506              	.LASF15:
+ 507 009e 75696E74 		.ascii	"uint8\000"
+ 507      3800
+ 508              	.LASF5:
+ 509 00a4 6C6F6E67 		.ascii	"long unsigned int\000"
+ 509      20756E73 
+ 509      69676E65 
+ 509      6420696E 
+ 509      7400
+ 510              	.LASF7:
+ 511 00b6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 511      206C6F6E 
+ 511      6720756E 
+ 511      7369676E 
+ 511      65642069 
+ 512              	.LASF18:
+ 513 00cd 496E6974 		.ascii	"InitializeSystem\000"
+ 513      69616C69 
+ 513      7A655379 
+ 513      7374656D 
+ 513      00
+ 514              	.LASF21:
+ 515 00de 636F6E6E 		.ascii	"connectPeriphDevice\000"
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 14
+
+
+ 515      65637450 
+ 515      65726970 
+ 515      68446576 
+ 515      69636500 
+ 516              	.LASF19:
+ 517 00f2 626C655F 		.ascii	"ble_state\000"
+ 517      73746174 
+ 517      6500
+ 518              	.LASF11:
+ 519 00fc 63686172 		.ascii	"char\000"
+ 519      00
+ 520              	.LASF13:
+ 521 0101 62644164 		.ascii	"bdAddr\000"
+ 521      647200
+ 522              	.LASF1:
+ 523 0108 756E7369 		.ascii	"unsigned char\000"
+ 523      676E6564 
+ 523      20636861 
+ 523      7200
+ 524              	.LASF17:
+ 525 0116 6D61696E 		.ascii	"main\000"
+ 525      00
+ 526              	.LASF20:
+ 527 011b 64657669 		.ascii	"deviceConnected\000"
+ 527      6365436F 
+ 527      6E6E6563 
+ 527      74656400 
+ 528              	.LASF4:
+ 529 012b 6C6F6E67 		.ascii	"long int\000"
+ 529      20696E74 
+ 529      00
+ 530              	.LASF22:
+ 531 0134 70657269 		.ascii	"peripheralFound\000"
+ 531      70686572 
+ 531      616C466F 
+ 531      756E6400 
+ 532              	.LASF25:
+ 533 0144 2E5C6D61 		.ascii	".\\main.c\000"
+ 533      696E2E63 
+ 533      00
+ 534              	.LASF10:
+ 535 014d 646F7562 		.ascii	"double\000"
+ 535      6C6500
+ 536              	.LASF24:
+ 537 0154 474E5520 		.ascii	"GNU C 4.8.4 20140526 (release) [ARM/embedded-4_8-br"
+ 537      4320342E 
+ 537      382E3420 
+ 537      32303134 
+ 537      30353236 
+ 538 0187 616E6368 		.ascii	"anch revision 211358] -mcpu=cortex-m0 -mthumb -g -O"
+ 538      20726576 
+ 538      6973696F 
+ 538      6E203231 
+ 538      31333538 
+ 539 01ba 30202D66 		.ascii	"0 -ffunction-sections\000"
+ 539      66756E63 
+ 539      74696F6E 
+ARM GAS  C:\Users\Zachary\AppData\Local\Temp\ccpWE7YK.s 			page 15
+
+
+ 539      2D736563 
+ 539      74696F6E 
+ 540              	.LASF3:
+ 541 01d0 73686F72 		.ascii	"short unsigned int\000"
+ 541      7420756E 
+ 541      7369676E 
+ 541      65642069 
+ 541      6E7400
+ 542              	.LASF0:
+ 543 01e3 7369676E 		.ascii	"signed char\000"
+ 543      65642063 
+ 543      68617200 
+ 544              	.LASF23:
+ 545 01ef 72657374 		.ascii	"restartScanning\000"
+ 545      61727453 
+ 545      63616E6E 
+ 545      696E6700 
+ 546              	.LASF9:
+ 547 01ff 666C6F61 		.ascii	"float\000"
+ 547      7400
+ 548              	.LASF2:
+ 549 0205 73686F72 		.ascii	"short int\000"
+ 549      7420696E 
+ 549      7400
+ 550              	.LASF8:
+ 551 020f 756E7369 		.ascii	"unsigned int\000"
+ 551      676E6564 
+ 551      20696E74 
+ 551      00
+ 552              	.LASF16:
+ 553 021c 4359424C 		.ascii	"CYBLE_GAP_BD_ADDR_T\000"
+ 553      455F4741 
+ 553      505F4244 
+ 553      5F414444 
+ 553      525F5400 
+ 554              	.LASF12:
+ 555 0230 73697A65 		.ascii	"sizetype\000"
+ 555      74797065 
+ 555      00
+ 556              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.4 20140526 (release) [ARM/embedded-4_8-br
