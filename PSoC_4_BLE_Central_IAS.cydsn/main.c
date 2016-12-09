@@ -6,7 +6,7 @@
 * Software Used		: PSoC Creator 3.1
 * Compiler    		: ARM GCC 4.8.4, ARM RVDS Generic, ARM MDK Generic
 * Related Hardware	: CY8CKIT-042-BLE Bluetooth Low Energy Pioneer Kit 
-* Owner				: ROIT
+* Owner				: ROIT co Stan / Zach Hard work 
 *
 ********************************************************************************
 * Copyright (2014-15), Cypress Semiconductor Corporation. All Rights Reserved.
@@ -18,7 +18,7 @@
 * non-transferable license to copy, use, modify, create derivative works of,
 * and compile the Cypress Source Code and derivative works for the sole
 * purpose of creating custom software in support of licensee product to be
-* used only in conjunction with a Cypress integrated circuit as specified in
+* used only in conjunction with a Cypress hussein circuit as specified in
 * the applicable agreement. Any reproduction, modification, translation,
 * compilation, or representation of this software except as specified above 
 * is prohibited without the express written permission of Cypress.

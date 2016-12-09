@@ -4,7 +4,7 @@
 * Version: 1.0
 *
 * Description:
-*  This is the source code for the PSoC 4 BLE Finde Me Code Example.
+*  Stan and Zach modified the source code of Find Me project.
 *
 * Hardware Dependency:
 *  CY8CKIT-042 BLE Pioneer Kit
@@ -81,9 +81,8 @@ int main()
     
     for(;;)
     {
-        /* Process all the pending BLE tasks. This single API call to 
-         * will service all the BLE stack events. This API MUST be called at least once
-         * in a BLE connection interval */
+       //Process BLE 
+	   
         CyBle_ProcessEvents();
     }
 }
@@ -129,7 +128,7 @@ void StackEventHandler(uint32 event, void *eventParam)
 	        break;
             
         case CYBLE_EVT_GAPP_ADVERTISEMENT_START_STOP:
-		/* Restart Advertisement if the state is disconnected */
+		// Restart Advertise
 		    if(CyBle_GetState() == CYBLE_STATE_DISCONNECTED )
 		    {
 			    CyBle_GappStartAdvertisement(CYBLE_ADVERTISING_FAST);
@@ -141,7 +140,8 @@ void StackEventHandler(uint32 event, void *eventParam)
             break;
             
         case CYBLE_EVT_GAP_DEVICE_DISCONNECTED:
-            /* ADD_CODE - Start the BLE fast advertisement. */
+            
+			// Advertise 
             CyBle_GappStartAdvertisement(CYBLE_ADVERTISING_FAST);
             
             Pin_B_Write(LED_ON);
@@ -153,7 +153,7 @@ void StackEventHandler(uint32 event, void *eventParam)
 		/* Extract connection handle */
         connectionHandle = *(CYBLE_CONN_HANDLE_T *)eventParam;	
 		
-		/* Start PWM for LED status control */
+		// Turn off lights for initial conditions
 		
         Pin_B_Write(LED_OFF);
         Pin_R_Write(LED_OFF);
@@ -200,7 +200,7 @@ void IasEventHandler(uint32 event, void *eventParam)
 			/* Extract the alert level value received from Client device*/
             alertLevel = *((iasWrCmdValueParam->value->val));
         
-        /*Based on alert Level level recieved, Drive LED*/
+        // Control lights based on alert level
         HandleAlertLEDs(alertLevel);
         }
         
@@ -223,22 +223,28 @@ void IasEventHandler(uint32 event, void *eventParam)
 *******************************************************************************/
 void HandleAlertLEDs(uint8 status)
 {
-    /* Update Alert LED status based on IAS Alert level characteristic. */
+    //Change colors based on alert level
     switch(status)
     {
         case NO_ALERT:
+		
+		//REd light goes on
             Pin_R_Write(LED_ON);
             Pin_G_Write(LED_OFF);
             Pin_B_Write(LED_OFF);
             break;
 
         case MILD_ALERT:
+		
+		//Green light goes on
             Pin_G_Write(LED_ON);
             Pin_R_Write(LED_OFF);
             Pin_B_Write(LED_OFF);
             break;
             
         case HIGH_ALERT:
+		
+		//Blue light goes on
             Pin_B_Write(LED_ON);
             Pin_R_Write(LED_OFF);
             Pin_G_Write(LED_OFF);

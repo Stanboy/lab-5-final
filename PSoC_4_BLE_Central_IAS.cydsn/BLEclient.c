@@ -329,12 +329,8 @@ void HandleScanDevices(CYBLE_GAPC_ADV_REPORT_T* scanReport)
 *******************************************************************************/
 void LoadPeripheralDeviceData(void)
 {
-	/* This stores the 6-byte BD address of peripheral device to which we have to connect.
-	   In this project, we have peripheral (CySmart USB Dongle) with BD Address 0x00A050654325. 
-	   We write this address to the 6-byte array 'peripheralAddress'. This array is then  
-	   used to compare the addresses of the advertising peripherals. If one of the advertising 
-	   peripherals has the same address, then we know it is the device which we want to connect  
-	   and initiate a connection request to it.*/
+	// Stores addresss that will be compared later
+	
 		peripheralAddress[5] = 0x00;
 		peripheralAddress[4] = 0xA0;
 		peripheralAddress[3] = 0x50;
